@@ -10,6 +10,8 @@ import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+import com.parse.Parse;
+import com.parse.ParseInstallation;
 
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
@@ -27,6 +29,9 @@ public class MainApplication extends Application {
         super.onCreate();
 
         initUniversalImageLoader();
+
+        Parse.initialize(this, Constants.PARSE_APPLICATION_ID, Constants.PARSE_CLIENT_KEY);
+        ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 
     private void initUniversalImageLoader() {

@@ -38,4 +38,5 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:1.6.0'
     compile 'com.google.code.gson:gson:2.3'
     compile 'jp.co.recruit_mp:android-HeaderFooterGridView:0.2.1'
+    compile 'com.parse.bolts:bolts-android:1.+'
 }
