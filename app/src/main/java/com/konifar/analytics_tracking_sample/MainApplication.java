@@ -2,6 +2,7 @@ package com.konifar.analytics_tracking_sample;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.gson.GsonBuilder;
 import com.konifar.analytics_tracking_sample.network.FlickrApiService;
 import com.konifar.analytics_tracking_sample.utils.ViewUtils;
@@ -13,6 +14,7 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
 
+import io.fabric.sdk.android.Fabric;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 
@@ -27,6 +29,7 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         initUniversalImageLoader();
 
