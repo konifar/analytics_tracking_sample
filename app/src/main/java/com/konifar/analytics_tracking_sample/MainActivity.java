@@ -1,6 +1,7 @@
 package com.konifar.analytics_tracking_sample;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -23,6 +24,8 @@ public class MainActivity extends ActionBarActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
+    @InjectView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipeRefresh;
     @InjectView(R.id.grid_view)
     HeaderFooterGridView mGridView;
     @InjectView(R.id.loading)
@@ -40,8 +43,19 @@ public class MainActivity extends ActionBarActivity {
 
         setSupportActionBar(mToolbar);
         initGridView();
+        initSwipeRefresh();
 
         showList(1);
+    }
+
+    private void initSwipeRefresh() {
+        mSwipeRefresh.setColorSchemeResources(R.color.theme500);
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                showList(1);
+            }
+        });
     }
 
     @Override
@@ -80,6 +94,11 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void onEvent(PhotoSearchCallbackEvent event) {
+        if (mSwipeRefresh.isRefreshing()) {
+            mSwipeRefresh.setRefreshing(false);
+            adapter.clear();
+        }
+
         if (event.isSuccess()) {
             adapter.addAll(event.getPhotos());
         }

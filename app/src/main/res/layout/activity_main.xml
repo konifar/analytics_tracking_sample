@@ -12,15 +12,22 @@
         app:elevation="4dp"
         app:popupTheme="@style/Theme.AppCompat.Light" />
 
-    <jp.co.recruit_mp.android.widget.HeaderFooterGridView
-        android:id="@+id/grid_view"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:layout_gravity="center_horizontal"
-        android:horizontalSpacing="@dimen/line"
-        android:numColumns="3"
-        android:verticalSpacing="@dimen/line" />
+        android:layout_below="@id/toolbar">
+
+        <jp.co.recruit_mp.android.widget.HeaderFooterGridView
+            android:id="@+id/grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:horizontalSpacing="@dimen/line"
+            android:numColumns="3"
+            android:verticalSpacing="@dimen/line" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <FrameLayout
         android:id="@+id/loading"
