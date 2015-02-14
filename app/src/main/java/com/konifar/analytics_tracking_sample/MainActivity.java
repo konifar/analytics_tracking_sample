@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import com.konifar.analytics_tracking_sample.events.PhotoSearchCallbackEvent;
 import com.konifar.analytics_tracking_sample.models.PhotoModel;
 import com.konifar.analytics_tracking_sample.models.pojo.Photo;
+import com.konifar.analytics_tracking_sample.utils.AnalyticsUtils;
 import com.konifar.analytics_tracking_sample.views.ListLoadingView;
 import com.konifar.analytics_tracking_sample.views.adapters.PhotosArrayAdapter;
 import com.konifar.analytics_tracking_sample.views.listeners.OnLoadMoreScrollListener;
@@ -46,6 +47,12 @@ public class MainActivity extends ActionBarActivity {
         initSwipeRefresh();
 
         showList(1);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AnalyticsUtils.getInstance().sendScreen(this);
     }
 
     private void initSwipeRefresh() {

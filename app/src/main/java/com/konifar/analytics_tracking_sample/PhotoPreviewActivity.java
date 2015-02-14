@@ -11,6 +11,7 @@ import android.view.animation.Interpolator;
 import android.widget.ImageView;
 
 import com.konifar.analytics_tracking_sample.models.pojo.Photo;
+import com.konifar.analytics_tracking_sample.utils.AnalyticsUtils;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.view.ViewPropertyAnimator;
@@ -93,6 +94,12 @@ public class PhotoPreviewActivity extends Activity {
                 }
             });
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AnalyticsUtils.getInstance().sendScreen(this);
     }
 
     public void startEnterAnimation() {
