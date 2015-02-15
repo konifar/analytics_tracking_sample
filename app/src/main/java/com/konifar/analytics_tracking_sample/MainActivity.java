@@ -87,7 +87,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void showList(final int page) {
         if (page > 1) mLoadingFooter.switchVisible(true);
-        PhotoModel.getInstance().getCatPhotos(page);
+        PhotoModel.getInstance(this).getCatPhotos(page);
     }
 
     private void initListViewScrollListener() {
