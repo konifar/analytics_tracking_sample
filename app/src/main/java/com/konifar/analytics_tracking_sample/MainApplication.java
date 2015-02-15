@@ -5,6 +5,7 @@ import android.app.Application;
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.GsonBuilder;
 import com.konifar.analytics_tracking_sample.network.FlickrApiService;
+import com.konifar.analytics_tracking_sample.utils.CrashlyticsTree;
 import com.konifar.analytics_tracking_sample.utils.ViewUtils;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -17,6 +18,7 @@ import com.parse.ParseInstallation;
 import io.fabric.sdk.android.Fabric;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
+import timber.log.Timber;
 
 public class MainApplication extends Application {
 
@@ -32,9 +34,18 @@ public class MainApplication extends Application {
         Fabric.with(this, new Crashlytics());
 
         initUniversalImageLoader();
+        initTimber();
 
         Parse.initialize(this, Constants.PARSE_APPLICATION_ID, Constants.PARSE_CLIENT_KEY);
         ParseInstallation.getCurrentInstallation().saveInBackground();
+    }
+
+    private void initTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        } else {
+            Timber.plant(new CrashlyticsTree());
+        }
     }
 
     private void initUniversalImageLoader() {

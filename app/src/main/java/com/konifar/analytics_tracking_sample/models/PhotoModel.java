@@ -8,6 +8,7 @@ import de.greenrobot.event.EventBus;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import timber.log.Timber;
 
 public class PhotoModel {
 
@@ -34,6 +35,7 @@ public class PhotoModel {
 
             @Override
             public void failure(RetrofitError error) {
+                Timber.e(error.getMessage());
                 EventBus.getDefault().post(new PhotoSearchCallbackEvent(false));
             }
         });
